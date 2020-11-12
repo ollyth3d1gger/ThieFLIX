@@ -1,0 +1,31 @@
+{
+  "name": "Thieflix",
+  "version": "1.0.5",
+  "description": "Simple Dizist.co Scraper Desktop Tv Show Application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "inspect": "electron --inspect=5858 ."
+  },
+  "repository": "https://github.com/ollyth3d1gger/thieflix.git",
+  "keywords": [
+    "Electron",
+    "dizist",
+    "scraper",
+    "thieflix"
+  ],
+  "author": "th3d1gger",
+  "license": "",
+  "devDependencies": {
+    "electron": "^2.0.18",
+    "electron-rebuild": "^1.7.3"
+  },
+  "dependencies": {
+    "axios": "^0.21.0",
+    "cheerio": "^1.0.0-rc.3",
+    "electron-db": "^0.15.7",
+    "electron-log": "^2.2.14",
+    "electron-updater": "^2.21.10",
+    "jquery": "^3.5.1"
+  }
+}

@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>ThieFLIx</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ThieFLIX">
+
+    <!-- Favicon -->
+    <link href="./assets/images/favicon.png" rel="icon" type="image/png">
+
+    <!-- CSS 
+    ================================================== -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/night-mode.css">
+    <link rel="stylesheet" href="./assets/css/framework.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.css"> 
+
+    <!-- icons
+    ================================================== -->
+    <link rel="stylesheet" href="./assets/css/icons.css">
+    <style>
+      .center {
+        text-align: center;
+        border: 3px solid green;
+      }
+      </style>
+ 
+</head>
+
+<body>
+
+  <div style="height: 100%;" id="wrapper">
+
+
+
+
+      <!-- content -->
+      <div class="page-content">
+
+
+          <!-- Header Container
+      ================================================== -->
+
+
+          <div id="oranla" class="container">
+
+              <div style="height: 100%!important;"  uk-img
+                  class="uk-height-large uk-background-norepeat  uk-background-center-center uk-background-image@s uk-section uk-padding-remove-top uk-flex uk-flex-middle">
+                  <div class="uk-width-1-1 uk-container">
+                      <div class="uk-container-xsmall uk-margin-auto uk-text-center">
+                          <img src="./assets/images/logo.png">
+                          <h3>Reklamsız Dizi Keyfi</h3>
+                          <div class="uk-margin">
+
+                              <div class="uk-inline uk-width-1-1">
+                                  <span class="uk-form-icon"><i class="uil-search"></i></span>
+                                  <input id="searcher" class="uk-input  uk-form-large" type="text"
+                                      placeholder="Dizi Arayın.... ">
+                                      
+                              </div>
+                          
+                            </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="uk-width-1-1 uk-container">
+                <div class="uk-width-1-2 uk-container">
+                
+                </div>
+                <div id="gostergelsin" style="display: none; margin-top: -240px;" class="uk-width-1-2 uk-container ">
+                  <div class="uk-card-default rounded mt-4">
+
+                    <ul class="uk-child-width-expand uk-tab"
+                        uk-switcher="animation: uk-animation-fade">
+                        <li><a href="#">Sonuçlar</a></li>
+                        
+                    </ul>
+
+                    <ul id="switchit" class="uk-switcher">
+                        <!-- tab 1 -->
+                        <li id="lizard"> 
+                          <a id="clicker" >
+                            <div id="burayayaz" class="py-3 px-4">
+
+                            
+                            </div>
+                          </a>
+                        </li>
+                        
+
+                    </ul>
+
+                </div>
+</div>
+                    
+              </div>
+              
+    
+
+
+              <!-- footer
+             ================================================== -->
+          
+
+          </div>
+
+      </div>
+
+  </div>
+  <input type="hidden" id="keyworder" value="">
+  <button id="aratgel" style="display: none;"></button>
+
+<input type="hidden" id="suanki" value="">
+<button style="display: none;" id="olcakmis"></button>
+<button style="display: none;" id="listele"></button>
+        <script>window.$ = window.jQuery = require('jquery');</script>
+        <script>
+          function testit(clickedElement) {
+            var yeni = clickedElement.getAttribute('kref').toLowerCase();
+      var link = yeni.split(' ').join('-');
+      var link = link.split(':').join('');
+      var link = 'https://dizist.com/'+link+'/';
+      
+            localStorage.setItem('dizi',clickedElement.getAttribute('kref'))
+            localStorage.setItem('diziay', document.getElementById('baslik'+clickedElement.getAttribute('id').slice(-1)).innerHTML) ;
+            
+   ;//I was clicked
+   document.getElementById('suanki').value = clickedElement.getAttribute('kref');
+   $('#olcakmis').click();         
+  }
+
+        </script>
+        <script>
+            (function (window, document, undefined) {
+                'use strict';
+                if (!('localStorage' in window)) return;
+                var nightMode = localStorage.getItem('gmtNightMode');
+                if (nightMode) {
+                    document.documentElement.className += ' night-mode';
+                }
+            })(window, document);
+
+
+            (function (window, document, undefined) {
+
+                'use strict';
+
+                // Feature test
+                if (!('localStorage' in window)) return;
+
+                // Get our newly insert toggle
+                var nightMode = document.querySelector('#night-mode');
+                if (!nightMode) return;
+
+                // When clicked, toggle night mode on or off
+                nightMode.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    document.documentElement.classList.toggle('night-mode');
+                    if (document.documentElement.classList.contains('night-mode')) {
+                        localStorage.setItem('gmtNightMode', true);
+                        return;
+                    }
+                    localStorage.removeItem('gmtNightMode');
+                }, false);
+
+            })(window, document);
+        </script>
+        <script>
+            function make_button_active(tab) {
+                //Get item siblings
+                var siblings = tab.siblings();
+
+                /* Remove active class on all buttons
+                siblings.each(function(){
+                    $(this).removeClass('active');
+                }) */
+
+                //Add the clicked button class
+                tab.addClass('watched');
+            }
+
+            //Attach events to highlight-watched
+            $(document).ready(function () {
+                
+               
+                      
+
+                      $('#searcher').keyup(function (e) {
+                        document.getElementById('keyworder').value = document.getElementById('searcher').value.toUpperCase();
+                        $('#aratgel').click();
+
+                      });
+                $('#oranla').css('height',window.innerHeight+"px");
+                if (localStorage) {
+                    var ind = localStorage['tab']
+                    make_button_active($('.highlight-watched li').eq(ind));
+                }
+
+                $(".highlight-watched li").click(function () {
+                    if (localStorage) {
+                        localStorage['tab'] = $(this).index();
+                    }
+                    make_button_active($(this));
+                });
+
+            });
+        </script>
+
+    <!-- javaScripts
+    ================================================== -->
+    <script src="./assets/js/framework.js"></script>
+   
+    <script src="./assets/js/simplebar.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/bootstrap-select.min.js"></script>
+    <script>
+      // You can also require other files to run in this process
+      require('./index.js')
+    </script>
+
+</body>
+
+</html>
