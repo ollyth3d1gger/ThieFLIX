@@ -14,6 +14,10 @@ const powerSaveBlocker = electron.remote.powerSaveBlocker;
 powerSaveBlocker.start('prevent-display-sleep');
 //index
 var d3 = require('./d3.min.js');
+function fethHtml(url){
+  var data  =  axios.get(url);
+  return data;
+}
 d3.select('#olcakmis').on('click', function(){
     console.log("bastinhelal");
     
